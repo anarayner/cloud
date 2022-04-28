@@ -2,7 +2,13 @@ const {validationResult} = require ('express-validator');
 const User = require ('../models/User');
 const bcrypt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
+const fs = require ('fs');
+const path = require ('path');
 require('dotenv').config()
+const fileService = require('../services/fileService')
+const File = require('../models/File')
+
+
 
 class AuthController {
     async registration(req, res, next) {
@@ -22,8 +28,17 @@ class AuthController {
             const hashPassword = await bcrypt.hash (password, 1);
             const user = new User ({email, password: hashPassword});
             console.log (user)
+            // await fs.mkdir(path.join(__dirname, 'test'), (err) => {
+            //     if (err) {
+            //         return console.error(err);
+            //     }
+            //     console.log('Directory created successfully!');
+            // });
+            await fileService.createDir(new File({user: user.id, name:''}))
+            console.log ('user')
+
             await user.save ();
-            return res.json ({message: "User was created"});
+            return res.json (user);
         } catch (e) {
             console.log (e);
             res.send ({message: "Server error"});

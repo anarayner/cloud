@@ -1,0 +1,30 @@
+.file{
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(4, 1fr);
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid royalblue;
+    align-items: center;
+}
+.file:hover{
+    transform: scale(1.02);
+}
+
+.file_name{
+    grid-column-start: 2;
+}
+
+.file_data{
+    grid-column-start: 5;
+    justify-self: center;
+
+}
+
+.file_size{
+    grid-column-start: 6;
+    justify-self: center;
+}
+
+.file_img{
+    width: 50px;
+}

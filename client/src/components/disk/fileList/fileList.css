@@ -1,0 +1,27 @@
+.file_list{
+    margin: 20px 0;
+
+}
+
+.file_list_header{
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(4, 1fr);
+    border-bottom: 3px solid royalblue;
+    padding-bottom: 20px;
+}
+
+.file_list_name{
+    grid-column-start: 2;
+}
+
+.file_list_data{
+    grid-column-start: 5;
+    justify-self: center;
+
+}
+
+.file_list_size{
+    grid-column-start: 6;
+    justify-self: center;
+
+}

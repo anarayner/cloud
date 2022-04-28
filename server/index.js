@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const corsMiddleware = require('./middleware/corsMiddleware')
-const router = require ('./routes/index');
+const router = require ('./routers/index');
 require('dotenv').config()
 
 

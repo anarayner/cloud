@@ -9,4 +9,4 @@ const User = new Schema({
   file: [{ type: ObjectId, ref: "File" }],
 });
 
-module.exports = model("User", User);
+module.exports = model('User', User);
