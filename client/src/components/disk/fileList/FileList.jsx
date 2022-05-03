@@ -42,8 +42,7 @@ const FileList = () => {
                             key={file._id}
                             timeout={500}
                             classNames={'item'}
-                            exit={false}
-                        >
+                            exit={false}>
                             <File file={file}/>
                         </CSSTransition>
                     )}
