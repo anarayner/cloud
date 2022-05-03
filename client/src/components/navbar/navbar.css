@@ -5,6 +5,7 @@
     background-color: white;
     width: 100%;
     justify-content: flex-start;
+    align-items: center;
 }
 .navbar_header{
     margin-left: 5px;
@@ -39,4 +40,11 @@
 
 .navbar_logo{
   width: 150px;
+}
+
+.navbar_search{
+    margin-left: 20px;
+    width: 200px;
+    margin-top: 0;
+    border-radius: 5px;
 }

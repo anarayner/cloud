@@ -7,14 +7,12 @@ const path = require('path');
 class FileService{
      createDir(file){
          return new Promise((resolve, reject) =>{
-             console.log('filePath1')
              const filePath =  (`${process.env.FILE_PATH}\\${file.user}\\${file.path}`)
              console.log(filePath)
              try{
                  if(!fs.existsSync(filePath)){
-                     console.log('filePath2')
                      fs.mkdirSync(filePath)
-                     return resolve({message: 'File was created'})
+                     return resolve(filePath)
                  }else {
                      return reject({message: 'File already exist'})
                  }
@@ -23,6 +21,38 @@ class FileService{
              }
          })
      }
+
+    createChildDir(file){
+        return new Promise((resolve, reject) =>{
+            const filePath =  file.path
+            console.log(filePath)
+            try{
+                if(!fs.existsSync(filePath)){
+                    fs.mkdirSync(filePath)
+                    return resolve(filePath)
+                }else {
+                    return reject({message: 'File already exist'})
+                }
+            }catch (e) {
+                return reject({message: 'File Error'})
+            }
+        })
+    }
+
+    deleteFile(file) {
+
+        if(file.type === 'dir'){
+            console.log(file.path)
+            fs.rmdirSync(file.path)
+        } else {
+            fs.unlinkSync(file.path)
+        }
+    }
+    getPath(file) {
+         const p = file.path
+        console.log(p)
+        return p
+    }
 }
 
 module.exports = new FileService()

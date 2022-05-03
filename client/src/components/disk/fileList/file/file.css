@@ -5,9 +5,11 @@
     padding-top: 20px;
     border-bottom: 1px solid royalblue;
     align-items: center;
+    cursor: pointer;
 }
 .file:hover{
     transform: scale(1.02);
+
 }
 
 .file_name{
@@ -27,4 +29,75 @@
 
 .file_img{
     width: 50px;
+}
+
+.delete_button{
+    width: 40px;
+    align-items: center;
+    border: none;
+    justify-self: center;
+
+}
+
+.download_button{
+    width: 70px;
+    align-items: center;
+    border: none;
+    justify-self: center;
+
+}
+
+
+.delete_button-icon{
+    width: 70px;
+    justify-self: center;
+
+}
+
+.download_button-icon{
+    width: 70px;
+    justify-self: center;
+}
+
+.file_button{
+    display: none;
+}
+
+.file:hover .file_data {
+    grid-column-start: 3;
+}
+.file:hover .file_size {
+    grid-column-start: 4;
+}
+.file:hover .download_button {
+    grid-column-start: 5;
+    display: grid;
+}
+.file:hover .delete_button {
+    grid-column-start: 6;
+    display: grid;
+}
+
+.file__block{
+    height: 150px;
+    width: 150px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file_block_img{
+    height: 100px;
+    width: 100px;
+}
+
+.file_block_button{
+    display: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.file__block:hover .file_block_button {
+    display: flex;
 }

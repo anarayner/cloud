@@ -1,6 +1,5 @@
 .file_list{
-    margin: 20px 0;
-
+    margin: 40px 0;
 }
 
 .file_list_header{
@@ -17,11 +16,37 @@
 .file_list_data{
     grid-column-start: 5;
     justify-self: center;
-
 }
 
 .file_list_size{
     grid-column-start: 6;
     justify-self: center;
+}
+
+.item-enter-active{
+   animation: item-enter 500ms forwards;
+}
+
+@keyframes item-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no_file_title{
+    font-size: 60px;
+    font-weight: 700;
+    opacity: 0.1;
+}
+
+.file_block{
+    display: flex;
+    margin: 40px 0;
+    flex-wrap: wrap;
 
 }
