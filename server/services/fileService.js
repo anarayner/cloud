@@ -27,7 +27,7 @@ class FileService{
             console.log(file.path)
             console.log(file)
 
-            const filePath =  (`${req.filePath}\\${file.user}\\${file.path}`)
+            const filePath =  file.path
             console.log(filePath)
             try{
                 if(!fs.existsSync(filePath)){
