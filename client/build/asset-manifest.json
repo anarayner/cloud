@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.565b8804.css",
-    "main.js": "/static/js/main.c5780cc1.js",
+    "main.css": "/static/css/main.85113a1f.css",
+    "main.js": "/static/js/main.3a3ec933.js",
     "static/media/logo-cloud.png": "/static/media/logo-cloud.4eaa8f48bb9ae298b4f7.png",
     "static/media/google-docs.png": "/static/media/google-docs.840d835451bb23f7433a.png",
     "index.html": "/index.html",
-    "main.565b8804.css.map": "/static/css/main.565b8804.css.map",
-    "main.c5780cc1.js.map": "/static/js/main.c5780cc1.js.map"
+    "main.85113a1f.css.map": "/static/css/main.85113a1f.css.map",
+    "main.3a3ec933.js.map": "/static/js/main.3a3ec933.js.map"
   },
   "entrypoints": [
-    "static/css/main.565b8804.css",
-    "static/js/main.c5780cc1.js"
+    "static/css/main.85113a1f.css",
+    "static/js/main.3a3ec933.js"
   ]
 }
