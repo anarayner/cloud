@@ -15,10 +15,10 @@ class FileController{
             if(!parentFile){
                 console.log(file)
                 file.path = name
-                await fileService.createDir(file).then(p => file.path = p)
+                await fileService.createDir(req, file).then(p => file.path = p)
             }else {
                 file.path = `${parentFile.path}\\${file.name}`
-                await fileService.createChildDir(file).then(p => file.path = p)
+                await fileService.createChildDir(req, file).then(p => file.path = p)
                 parentFile.children.push(file._id)
                 await parentFile.save()
             }
@@ -58,6 +58,8 @@ class FileController{
 
     async uploadFiles(req, res){
         try{
+            console.log(req.files)
+            console.log(req.body)
 
             const file = req.files.file
 
@@ -70,26 +72,22 @@ class FileController{
             user.diskSpace = user.usedSpace + file.size
             let path
             if(parent){
-                path = (`${process.env.FILE_PATH}\\${user._id}\\${parent.path}\\${file.name}`)
+                path = (`${req.filePath}\\${user._id}\\${parent.path}\\${file.name}`)
             } else {
-                path = (`${process.env.FILE_PATH}\\${user._id}\\${file.name}`)
+                path = (`${req.filePath}\\${user._id}\\${file.name}`)
             }
             if(fs.existsSync(path)){
                 return res.status (400).json ({message: 'File already exist'})
             }
             await file.mv (path)
             const type = file.name.split('.').pop()
-            let filePath = file.name
-            if(parent){
-                filePath = parent.path + '\\' + file.name
-            }
 
             const dbFile = new File({
                 name: file.name,
                 type,
                 size: file.size,
-                path: filePath,
-                parent: parent?._id,
+                path,
+                parent: parent ? parent?._id : null,
                 user: user._id
             })
 
@@ -129,7 +127,7 @@ class FileController{
             if(!file){
                 return res.status (500).json ({message: 'File not found'})
             }
-             fileService.deleteFile(file)
+             fileService.deleteFile(req, file)
             await file.remove()
             return res.json ({message: 'File was deleted'})
         } catch (e) {

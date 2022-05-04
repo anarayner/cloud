@@ -1,18 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const corsMiddleware = require('./middleware/corsMiddleware')
+const filePathMiddleware = require('./middleware/filepathMiddleware')
 const router = require ('./routers/index');
 require('dotenv').config()
 const fileUpload = require("express-fileupload");
+const path = require('path')
 
 const app = express();
 const PORT = process.env.PORT
 
-
-app.use(corsMiddleware)
-
-app.use(express.json());
 app.use(fileUpload({}));
+app.use(corsMiddleware)
+app.use(filePathMiddleware(path.resolve(__dirname, 'files')))
+app.use(express.json());
 app.use('/api', router);
 
 const start = async () =>{

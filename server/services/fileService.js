@@ -5,9 +5,9 @@ const path = require('path');
 
 
 class FileService{
-     createDir(file){
+     createDir(req, file){
          return new Promise((resolve, reject) =>{
-             const filePath =  (`${process.env.FILE_PATH}\\${file.user}\\${file.path}`)
+             const filePath =  (`${req.filePath}\\${file.user}\\${file.path}`)
              console.log(filePath)
              try{
                  if(!fs.existsSync(filePath)){
@@ -22,9 +22,12 @@ class FileService{
          })
      }
 
-    createChildDir(file){
+    createChildDir(req, file){
         return new Promise((resolve, reject) =>{
-            const filePath =  file.path
+            console.log(file.path)
+            console.log(file)
+
+            const filePath =  (`${req.filePath}\\${file.user}\\${file.path}`)
             console.log(filePath)
             try{
                 if(!fs.existsSync(filePath)){
@@ -39,7 +42,7 @@ class FileService{
         })
     }
 
-    deleteFile(file) {
+    deleteFile(req, file) {
 
         if(file.type === 'dir'){
             console.log(file.path)
@@ -48,7 +51,7 @@ class FileService{
             fs.unlinkSync(file.path)
         }
     }
-    getPath(file) {
+    getPath(req, file) {
          const p = file.path
         console.log(p)
         return p

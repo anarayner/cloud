@@ -28,7 +28,7 @@ class AuthController {
             const hashPassword = await bcrypt.hash (password, 1);
             const user = new User ({email, password: hashPassword});
             console.log (user)
-            await fileService.createDir(new File({user: user.id, name:''}))
+            await fileService.createDir(req, new File({user: user.id, name:''}))
             console.log ('user')
 
             await user.save ();
