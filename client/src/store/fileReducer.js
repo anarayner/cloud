@@ -13,6 +13,7 @@ const defaultState = {
     files: [],
     currentDir: null,
     popupDisplay: 'none',
+    popupUploadDisplay: 'none',
     dirStack: [],
     view: 'list'
 }

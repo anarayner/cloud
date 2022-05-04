@@ -38,7 +38,8 @@ const File = ({file}) => {
             >
                 <img src={file.type === 'dir' ? folderLogo : fileLogo} alt='' className='file_img'/>
                 <div className='file_name'>{file.name}</div>
-
+                <div className='file_data'>{file.data.slice (0, 10)}</div>
+                <div className='file_size'>{sizeFormat (file.size)}</div>
                 {file.type !== 'dir' && <button
                     onClick={(e) => downloadClickHandler (e)}
                     className='file_button download_button'>
@@ -72,7 +73,7 @@ const File = ({file}) => {
                 </button>
             </div>
         );
-    }
+    };
 
 };
 

@@ -21,6 +21,7 @@ const Disk = () => {
     const loader = useSelector(state => state.app.loader)
     const [dragEnter, setDragEnter] = useState(false)
     const [sort, setSort] = useState('type')
+    const [uploadingFile, setUploadingFile] = useState(null)
 
     useEffect(()=>{
      dispatch(getFiles(currentDir, sort))
@@ -35,9 +36,21 @@ const Disk = () => {
         dispatch(setCurrentDir(backDirId))
     }
     async function fileUploadHandler(event) {
-        const files = [...event.target.files]
-        await files.forEach (file => dispatch (uploadFile (file, currentDir)))
+        // const files = [...event.target.files]
+        // await files.forEach (file => dispatch (uploadFile (file, currentDir)))
+        const file = event.target.files[0]
+         console.log(file)
+        const form = new FormData();
+        form.append('file', file)
+        dispatch (uploadFile (form, currentDir))
+        // for (const [key, value] of form.entries()) {
+        //     console.log('hello');
+        //     console.log(key, value);
+        // }
+        // console.log('front file', form)
+
     }
+
 
     function dragEventHandler(event){
         event.preventDefault()
@@ -73,6 +86,7 @@ const Disk = () => {
                 <button className="disk_back" onClick={()=> backClickHandler()}>Go Back</button>
                 <button className="disk_create" onClick={()=> showPopupHandler()}>New Folder</button>
                 <div className="disk_upload">
+                    <form>
                     <label
                         htmlFor='disk_upload_input'
                         className="disk_upload_label">Upload file</label>
@@ -83,6 +97,7 @@ const Disk = () => {
                            onChange={(event)=> fileUploadHandler(event)}
                            multiple={true}
                     />
+                    </form>
                 </div>
                 <div className='file_options'>
                 <select value={sort}

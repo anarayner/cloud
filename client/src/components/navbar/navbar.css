@@ -21,15 +21,17 @@
     border-radius: 5px;
     font-weight: 500;
     font-size: 14px;
+    color: royalblue;
 }
 
 .navbar_registration{
     margin-right: 20px;
-    padding: 8px 25px;
+    padding: 6px 20px;
     border: 2px solid royalblue;
     border-radius: 5px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 14px;
+    color: royalblue;
 }
 
 .container{

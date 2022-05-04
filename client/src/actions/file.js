@@ -4,12 +4,11 @@ import {addUploadFile, changeUploadFile, showUploader} from '../store/uploadRedu
 import {hideLoader, showLoader} from '../store/appReducer';
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 
-
 export function getFiles(dirId, sort){
     return async dispatch =>{
         try{
             dispatch(showLoader())
-            let url = `http://localhost:7000/api/files`
+            let url = `https://blue-cloud-by-rayner.herokuapp.com/api/files`
             if(dirId && sort){
                 url = `${url}?parent=${dirId}&sort=${sort}`
             }
@@ -35,7 +34,7 @@ export function getFiles(dirId, sort){
 export function createDir(dirId, name){
     return async dispatch =>{
         try{
-            const response = await axios.post(`http://localhost:7000/api/files`,{
+            const response = await axios.post(`https://blue-cloud-by-rayner.herokuapp.com/api/files`,{
                 name,
                 parent: dirId,
                 type: 'dir'
@@ -55,17 +54,24 @@ export function createDir(dirId, name){
 export function uploadFile(file, dirId){
     return async dispatch =>{
         try{
-            const formData = new FormData()
-            formData.append('file', file)
-            if(dirId){
-               formData.append('parent', dirId)
+            // const formData = new FormData()
+            // formData.append('file', file)
+            // if(dirId){
+            //    formData.append('parent', dirId)
+            // }
+            for (const [key, value] of file.entries()) {
+                console.log('hello');
+                console.log(key, value);
             }
-                const uploadFile = {name: file.name, progress: 0, id: Date.now()}
+            const uploadFile = {name: file.name, progress: 0, id: Date.now()}
             dispatch(showUploader())
             dispatch(addUploadFile(file))
-                const response = await axios.post(`http://localhost:7000/api/files/upload`, formData,
+                const response = await axios.post(`https://blue-cloud-by-rayner.herokuapp.com/api/files/upload`, file,
                 {
-                headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'multipart/form-data'
+                },
                 onUploadProgress: progressEvent => {
                     const totalLength = progressEvent.lengthComputable ?
                         progressEvent.total :
@@ -87,7 +93,7 @@ export function uploadFile(file, dirId){
 }
 
 export async function downloadFile(file){
-    const response = await fetch(`http://localhost:7000/api/files/download?id=${file._id}`,{
+    const response = await fetch(`https://blue-cloud-by-rayner.herokuapp.com/api/files/download?id=${file._id}`,{
         headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`},
     })
     if(response.status === 200){
@@ -110,7 +116,7 @@ export function deleteFile(file) {
     return async dispatch =>{
         try{
             console.log(file._id)
-            const response = await axios.delete(`http://localhost:7000/api/files?id=${file._id}`, {
+            const response = await axios.delete(`https://blue-cloud-by-rayner.herokuapp.com/api/files?id=${file._id}`, {
                 headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
             })
             console.log(response)
@@ -125,7 +131,7 @@ export function deleteFile(file) {
 export function searchFile(search) {
     return async dispatch =>{
         try{
-            const response = await axios.get(`http://localhost:7000/api/files/search?search=${search}`, {
+            const response = await axios.get(`https://blue-cloud-by-rayner.herokuapp.com/api/files/search?search=${search}`, {
                 headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}
             })
             dispatch(setFiles(response.data))

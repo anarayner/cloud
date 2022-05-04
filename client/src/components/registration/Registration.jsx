@@ -37,7 +37,7 @@ const Auth = () => {
                    placeholder={'Email Address'}/>
             <Input value ={password}
                    setValue={setPassword}
-                   type={'text'}
+                   type={'password'}
                    placeholder={'Password'}/>
             <button className='registration_btn'
                     onClick={() => register(email, password)}

@@ -3,7 +3,7 @@ import {setUser} from '../store/userReducer';
 
 export const registration = async (email, password) =>{
     try{
-        const response = await axios.post('http://localhost:7000/api/auth/registration',
+        const response = await axios.post('https://blue-cloud-by-rayner.herokuapp.com/api/auth/registration',
             {email, password})
         console.log(response.data)
         alert(response.data.message)
@@ -16,7 +16,7 @@ export const registration = async (email, password) =>{
 export const login = (email, password) =>{
     return async dispatch =>{
         try{
-            const response = await axios.post('http://localhost:7000/api/auth/login',
+            const response = await axios.post('https://blue-cloud-by-rayner.herokuapp.com/api/auth/login',
                 {email, password})
             console.log(response.data)
             dispatch(setUser(response.data.user))
@@ -31,7 +31,7 @@ export const login = (email, password) =>{
 export const auth = () =>{
     return async dispatch =>{
         try{
-            const response = await axios.get('http://localhost:7000/api/auth/auth',
+            const response = await axios.get('https://blue-cloud-by-rayner.herokuapp.com/api/auth/auth',
                 {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}}
                 )
             console.log(response.data)
